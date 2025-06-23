@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center - Go Kitty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #87CEEB;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #87CEEB;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #87CEEB;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .support-content h1, .support-content h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .support-content h3 {
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .support-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .support-content ul, .support-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .support-content li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .support-content blockquote {
+            background-color: #e3f2fd;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #87CEEB;
+            margin: 1rem 0;
+        }
+
+        .support-content code {
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .support-content pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-answer {
+            color: #666;
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #87CEEB 0%, #B8E6FF 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .contact-method:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../" class="nav-brand">🐱 Go Kitty</a>
+            <div class="nav-links">
+                
+                <a href="../" class="nav-link">Service Info</a>
+                <a href="../privacy/" class="nav-link">Privacy Policy</a>
+                <a href="../../" class="nav-link">All Services</a>
+            
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="service-icon">🐱</div>
+            <h1>Support Center</h1>
+            <p>Get help with Go Kitty - we're here to assist you!</p>
+        </div>
+
+        <div class="support-content">
+            <h1 id="go-kitty-support-center">Go Kitty Support Center</h1>
+<p>Welcome to the <strong>Go Kitty</strong> support center! We're here to help you have the best experience with our endless running adventure game.</p>
+<h2 id="getting-started">🎮 Getting Started</h2>
+<h3 id="how-to-play">How to Play</h3>
+<ol>
+<li><strong>Tap to Jump</strong>: Tap anywhere on the screen to make Kitty jump</li>
+<li><strong>Avoid Obstacles</strong>: Navigate through various obstacles and challenges</li>
+<li><strong>Collect Items</strong>: Gather coins, power-ups, and special items along the way</li>
+<li><strong>Beat Your High Score</strong>: Challenge yourself to run further each time!</li>
+</ol>
+<h3 id="game-controls">Game Controls</h3>
+<ul>
+<li><strong>Single Tap</strong>: Small jump</li>
+<li><strong>Double Tap</strong>: High jump</li>
+<li><strong>Hold</strong>: Glide (when power-up is active)</li>
+</ul>
+<h2 id="technical-support">📱 Technical Support</h2>
+<h3 id="system-requirements">System Requirements</h3>
+<ul>
+<li><strong>iOS</strong>: 12.0 or later</li>
+<li><strong>Android</strong>: API level 21 (Android 5.0) or later</li>
+<li><strong>Storage</strong>: At least 100MB free space</li>
+<li><strong>RAM</strong>: 2GB recommended</li>
+</ul>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="game-wont-start">Game Won't Start</h4>
+<ol>
+<li>Check if your device meets the minimum requirements</li>
+<li>Restart your device</li>
+<li>Ensure you have enough storage space</li>
+<li>Update to the latest version of Go Kitty</li>
+</ol>
+<h4 id="performance-issues">Performance Issues</h4>
+<ol>
+<li>Close other apps running in the background</li>
+<li>Lower graphics settings in the game menu</li>
+<li>Restart the game</li>
+<li>Check for device software updates</li>
+</ol>
+<h4 id="lost-progress">Lost Progress</h4>
+<ol>
+<li>Make sure you're signed in to your account</li>
+<li>Check your internet connection</li>
+<li>Try refreshing the game data in settings</li>
+<li>Contact our support team if the issue persists</li>
+</ol>
+<h2 id="gameplay-help">🏆 Gameplay Help</h2>
+<h3 id="power-ups-guide">Power-ups Guide</h3>
+<ul>
+<li><strong>🚀 Speed Boost</strong>: Increases running speed temporarily</li>
+<li><strong>🛡️ Shield</strong>: Protects from one obstacle hit</li>
+<li><strong>🪙 Coin Magnet</strong>: Automatically collects nearby coins</li>
+<li><strong>✨ Double Points</strong>: Doubles score for a limited time</li>
+</ul>
+<h3 id="tips-for-high-scores">Tips for High Scores</h3>
+<ol>
+<li><strong>Master the Timing</strong>: Learn obstacle patterns</li>
+<li><strong>Use Power-ups Wisely</strong>: Save shields for difficult sections</li>
+<li><strong>Collect Everything</strong>: Coins and items boost your score</li>
+<li><strong>Stay Focused</strong>: The game gets faster as you progress</li>
+</ol>
+<h2 id="in-app-purchases">💰 In-App Purchases</h2>
+<h3 id="what-can-i-buy">What Can I Buy?</h3>
+<ul>
+<li><strong>Coin Packs</strong>: Get extra coins for upgrades</li>
+<li><strong>Character Skins</strong>: Customize your kitty's appearance</li>
+<li><strong>Power-up Bundles</strong>: Start with helpful power-ups</li>
+<li><strong>Ad-Free Experience</strong>: Remove advertisements</li>
+</ul>
+<h3 id="refund-policy">Refund Policy</h3>
+<p>If you're not satisfied with your purchase, you can request a refund within 48 hours through your device's app store.</p>
+<h2 id="account-data">🔧 Account &amp; Data</h2>
+<h3 id="creating-an-account">Creating an Account</h3>
+<ol>
+<li>Open Go Kitty</li>
+<li>Tap "Settings" → "Account"</li>
+<li>Choose sign-in method (Google, Apple, or Email)</li>
+<li>Follow the prompts to create your account</li>
+</ol>
+<h3 id="data-backup">Data Backup</h3>
+<p>Your progress is automatically saved to the cloud when you're signed in. This ensures you won't lose your progress when switching devices.</p>
+<h2 id="frequently-asked-questions">🎯 Frequently Asked Questions</h2>
+<h3 id="is-go-kitty-free-to-play">Is Go Kitty free to play?</h3>
+<p>Yes! Go Kitty is free to download and play. Optional in-app purchases are available for additional content.</p>
+<h3 id="can-i-play-offline">Can I play offline?</h3>
+<p>Yes, you can play Go Kitty without an internet connection. However, some features like leaderboards and cloud saves require an internet connection.</p>
+<h3 id="how-do-i-unlock-new-characters">How do I unlock new characters?</h3>
+<p>New characters can be unlocked by:
+- Reaching certain score milestones
+- Collecting special items during gameplay
+- Purchasing character packs</p>
+<h3 id="why-do-i-see-ads">Why do I see ads?</h3>
+<p>Ads help us keep the game free for everyone. You can remove ads with the "Ad-Free" purchase option.</p>
+<h3 id="can-i-sync-progress-between-devices">Can I sync progress between devices?</h3>
+<p>Yes! Sign in to your account on both devices to sync your progress automatically.</p>
+<h2 id="report-a-bug">🐛 Report a Bug</h2>
+<p>Found a bug? Help us improve Go Kitty by reporting it!</p>
+<h3 id="what-to-include">What to Include:</h3>
+<ol>
+<li><strong>Device Information</strong>: Model and OS version</li>
+<li><strong>Game Version</strong>: Check in Settings → About</li>
+<li><strong>Description</strong>: What happened and when</li>
+<li><strong>Steps to Reproduce</strong>: How can we recreate the issue?</li>
+<li><strong>Screenshots</strong>: If applicable</li>
+</ol>
+<h3 id="where-to-report">Where to Report:</h3>
+<p>Email us at <strong>support@ddwservices.com</strong> with the subject line "Go Kitty Bug Report"</p>
+<h2 id="feature-requests">💡 Feature Requests</h2>
+<p>Have an idea for Go Kitty? We'd love to hear it! Send your suggestions to <strong>support@ddwservices.com</strong> with the subject line "Go Kitty Feature Request"</p>
+<hr />
+<h2 id="contact-information">📞 Contact Information</h2>
+<p><strong>Email</strong>: support@ddwservices.com<br />
+<strong>Response Time</strong>: Within 24 hours<br />
+<strong>Languages</strong>: English, Korean</p>
+<p>Thank you for playing Go Kitty! 🐱✨ </p>
+        </div>
+
+        <div class="contact-section">
+            <h2>Still Need Help?</h2>
+            <p>Can't find what you're looking for? Contact our support team!</p>
+            
+            <div class="contact-methods">
+                <a href="mailto:support@ddwservices.com" class="contact-method">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
+                    <div>Email Support</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">support@ddwservices.com</div>
+                </a>
+                <div class="contact-method">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💬</div>
+                    <div>Community</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travelee - 개인정보처리방침</title>
+    <title>개인정보처리방침 - Travelee</title>
     <style>
         * {
             margin: 0;
@@ -16,286 +16,193 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Language Switcher */
-        .language-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .lang-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .lang-current {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        .lang-current:hover {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .flag {
-            font-size: 1.2rem;
-        }
-
-        .lang-arrow {
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .lang-dropdown.open .lang-arrow {
-            transform: rotate(180deg);
-        }
-
-        .lang-options {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            min-width: 120px;
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-
-        .lang-dropdown.open .lang-options {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .lang-option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1rem;
-            color: #333;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .lang-option:hover {
-            background-color: #f8f9fa;
-        }
-
-        .lang-option.current {
-            background-color: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .breadcrumb {
+        .nav {
             background: white;
             padding: 1rem 2rem;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .breadcrumb-nav {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
         }
 
-        .breadcrumb-nav a {
-            color: #667eea;
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #FF6B6B;
             text-decoration: none;
-        }
-
-        .breadcrumb-nav a:hover {
-            text-decoration: underline;
-        }
-
-        .version-info {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 1rem;
-            margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .version-info h3 {
-            color: #1976d2;
-            margin-bottom: 0.5rem;
-        }
-
-        .version-info p {
-            color: #1565c0;
-            margin-bottom: 0.5rem;
-        }
-
-        .version-info a {
-            color: #1976d2;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .version-info a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            flex: 1;
-        }
-
-        .privacy-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .privacy-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #2c3e50;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 0.5rem;
-        }
-
-        .privacy-content h3 {
-            font-size: 1.4rem;
-            margin: 2rem 0 1rem 0;
-            color: #2c3e50;
-        }
-
-        .privacy-content p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .privacy-content ul {
-            margin: 1rem 0 1rem 2rem;
-        }
-
-        .privacy-content li {
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        .contact-info {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-
-        .contact-info h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
         }
 
         .nav-links {
             display: flex;
-            justify-content: center;
             gap: 2rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .nav-link {
-            padding: 1rem 2rem;
-            background: white;
-            color: #667eea;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid #667eea;
+            color: #666;
+            transition: color 0.3s;
         }
 
         .nav-link:hover {
-            background: #667eea;
-            color: white;
+            color: #FF6B6B;
         }
 
-        .footer {
-            background-color: #343a40;
-            color: #adb5bd;
-            text-align: center;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 2rem;
         }
 
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #FF6B6B;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .policy-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .policy-content h1, .policy-content h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #FF6B6B;
+            padding-bottom: 0.5rem;
+        }
+
+        .policy-content h3 {
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .policy-content p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .policy-content ul, .policy-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .policy-content li {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .policy-content blockquote {
+            background-color: #e3f2fd;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #FF6B6B;
+            margin: 1rem 0;
+        }
+
+        .policy-content code {
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .policy-content pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .last-updated {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #FF6B6B;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #FF5252;
+        }
+
+        .btn-secondary {
+            background-color: #f8f9fa;
+            color: #666;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+
         @media (max-width: 768px) {
-            .language-switcher {
-                top: 10px;
-                right: 10px;
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
             }
 
             .header h1 {
                 font-size: 2rem;
             }
 
-            .breadcrumb-nav {
-                font-size: 0.8rem;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            .privacy-content {
-                padding: 2rem;
-            }
-
-            .nav-links {
+            .actions {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .nav-link {
+            .btn {
                 width: 100%;
                 max-width: 300px;
                 text-align: center;
@@ -304,160 +211,138 @@
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <div class="lang-dropdown" id="langDropdown">
-            <button class="lang-current" id="langCurrent">
-                <span class="flag">🇰🇷</span>
-                <span>KO</span>
-                <span class="lang-arrow">▼</span>
-            </button>
-            <div class="lang-options" id="langOptions">
-                <a href="../../../en/travelee/privacy/" class="lang-option">
-                    <span class="flag">🇺🇸</span>
-                    <span>English</span>
-                </a>
-                <a href="../../../ko/travelee/privacy/" class="lang-option current">
-                    <span class="flag">🇰🇷</span>
-                    <span>한국어</span>
-                </a>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../" class="nav-brand">✈️ Travelee</a>
+            <div class="nav-links">
+                
+                <a href="../" class="nav-link">서비스 정보</a>
+                <a href="../support/" class="nav-link">지원 센터</a>
+                <a href="./history/" class="nav-link">방침 히스토리 보기</a>
+                <a href="../../" class="nav-link">전체 서비스</a>
+            
             </div>
-        </div>
-    </div>
-
-    <header class="header">
-        <h1>개인정보처리방침</h1>
-        <p>개인정보 보호는 저희에게 매우 중요합니다</p>
-    </header>
-
-    <nav class="breadcrumb">
-        <div class="breadcrumb-nav">
-            <a href="../../">서비스</a>
-            <span>→</span>
-            <a href="../">Travelee</a>
-            <span>→</span>
-            <span>개인정보처리방침</span>
         </div>
     </nav>
 
-    <main class="container">
-        <div class="version-info">
-            <h3>현재 버전: 1.0</h3>
-            <p>시행일: 2025년 1월 1일</p>
-            <p>최종 수정일: 2025년 1월 1일</p>
-            <a href="./history/">버전 히스토리 보기 →</a>
+    <div class="container">
+        <div class="header">
+            <div class="service-icon">✈️</div>
+            <h1>개인정보처리방침</h1>
+            <p>Travelee가 개인정보를 보호하는 방법</p>
         </div>
 
-        <div class="privacy-content">
-            <h2>1. 개요</h2>
-            <p>
-                Travelee에 오신 것을 환영합니다. 저희는 개인정보를 존중하고 보호하기 위해 최선을 다하고 있습니다. 
-                이 개인정보처리방침은 여러분이 저희 여행 일정 관리 애플리케이션을 사용할 때 개인정보를 어떻게 처리하는지 
-                설명하고, 개인정보 권리와 법적 보호에 대해 알려드립니다.
-            </p>
+        <div class="last-updated">
+            <strong>최종 수정:</strong> 2025년 06월 23일
+        </div>
 
-            <h2>2. 수집하는 데이터</h2>
-            <p>저희는 다음과 같은 개인정보를 수집, 이용, 저장, 전송할 수 있습니다:</p>
+        <div class="policy-content">
+            <h1 id="_1">개인정보처리방침</h1>
+<h2 id="1">1. 개인정보의 처리목적</h2>
+<p><strong>Travelee</strong>는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+<h3 id="_2">서비스 제공</h3>
+<ul>
+<li>여행 계획 및 일정 관리 서비스 제공</li>
+<li>맞춤형 여행 추천 서비스 제공</li>
+<li>사용자 맞춤형 콘텐츠 제공</li>
+</ul>
+<h3 id="_3">회원 관리</h3>
+<ul>
+<li>회원 가입 및 관리</li>
+<li>본인확인 및 개인식별</li>
+<li>불량회원의 부정이용 방지와 비인가 사용 방지</li>
+</ul>
+<h2 id="2">2. 개인정보의 처리 및 보유기간</h2>
+<p><strong>Travelee</strong>는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>보유기간</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>회원정보</td>
+<td>회원탈퇴 시까지</td>
+<td>서비스 제공을 위한 필수 정보</td>
+</tr>
+<tr>
+<td>여행 기록</td>
+<td>3년</td>
+<td>서비스 개선 및 통계 분석</td>
+</tr>
+<tr>
+<td>접속로그</td>
+<td>3개월</td>
+<td>통신비밀보호법</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-3">3. 개인정보의 제3자 제공</h2>
+<p><strong>Travelee</strong>는 원칙적으로 정보주체의 개인정보를 수집·이용 목적으로 명시한 범위 내에서 처리하며, 정보주체의 사전 동의 없이는 본래의 목적 범위를 초과하여 처리하거나 제3자에게 제공하지 않습니다.</p>
+<h3 id="3">제3자 제공 현황</h3>
+<p>현재 개인정보를 제3자에게 제공하고 있지 않습니다.</p>
+<h2 id="4">4. 개인정보 처리의 위탁</h2>
+<p><strong>Travelee</strong>는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>
+<h3 id="_4">위탁업체 현황</h3>
+<ul>
+<li><strong>클라우드 서비스</strong>: AWS (아마존웹서비스)</li>
+<li>위탁업무: 서버 호스팅 및 데이터 저장</li>
+<li>개인정보 보유기간: 위탁계약 종료 시까지</li>
+</ul>
+<h2 id="5">5. 정보주체의 권리·의무 및 행사방법</h2>
+<p>정보주체는 <strong>Travelee</strong>에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
+<ol>
+<li>개인정보 처리현황 통지요구</li>
+<li>개인정보 열람요구</li>
+<li>개인정보 정정·삭제요구</li>
+<li>개인정보 처리정지요구</li>
+</ol>
+<blockquote>
+<p><strong>권리 행사 방법</strong><br />
+위의 권리 행사는 개인정보보호법 시행규칙 별지 제8호 서식에 따라 작성하여 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 <strong>Travelee</strong>는 이에 대해 지체없이 조치하겠습니다.</p>
+</blockquote>
+<h2 id="6">6. 개인정보의 안전성 확보조치</h2>
+<p><strong>Travelee</strong>는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.</p>
+<h3 id="_5">관리적 조치</h3>
+<ul>
+<li>개인정보 취급직원의 최소화 및 교육</li>
+<li>개인정보 보호책임자 등의 지정</li>
+</ul>
+<h3 id="_6">기술적 조치</h3>
+<ul>
+<li>개인정보처리시스템 등의 접근권한 관리</li>
+<li>접근통제시스템 설치</li>
+<li>개인정보의 암호화</li>
+<li>보안프로그램 설치 및 갱신</li>
+</ul>
+<h3 id="_7">물리적 조치</h3>
+<ul>
+<li>전산실, 자료보관실 등의 접근통제</li>
+</ul>
+<h2 id="7">7. 개인정보보호책임자</h2>
+<p><strong>Travelee</strong>는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보보호책임자를 지정하고 있습니다.</p>
+<h3 id="_8">개인정보보호책임자</h3>
+<ul>
+<li><strong>성명</strong>: DDW Services 개인정보보호팀</li>
+<li><strong>연락처</strong>: support@ddwservices.com</li>
+</ul>
+<p>정보주체께서는 <strong>Travelee</strong>의 서비스를 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보보호책임자에게 문의하실 수 있습니다.</p>
+<h2 id="8">8. 개인정보 처리방침 변경</h2>
+<p>이 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p>
+<hr />
+<p><strong>시행일자</strong>: 2024년 1월 1일 </p>
+        </div>
+
+        <div class="actions">
             
-            <h3>2.1 여행 데이터</h3>
-            <ul>
-                <li>여행 일정 및 스케줄</li>
-                <li>목적지 정보</li>
-                <li>여행 날짜 및 시간</li>
-                <li>메모 및 개인 여행 선호도</li>
-            </ul>
-
-            <h3>2.2 기술 데이터</h3>
-            <ul>
-                <li>기기 정보 및 식별자</li>
-                <li>사용 데이터 및 분석</li>
-                <li>로그 데이터 및 충돌 보고서</li>
-            </ul>
-
-            <h2>3. 개인정보 이용 목적</h2>
-            <p>저희는 개인정보를 다음 목적으로 이용합니다:</p>
-            <ul>
-                <li>여행 계획 서비스 제공 및 유지</li>
-                <li>기기 간 여행 데이터 백업 및 동기화</li>
-                <li>국가별 여행 정보 제공</li>
-                <li>애플리케이션 및 사용자 경험 개선</li>
-                <li>서비스 업데이트 관련 소통</li>
-            </ul>
-
-            <h2>4. 데이터 보안</h2>
-            <p>
-                저희는 개인정보가 우발적으로 분실, 무단 사용, 접근, 변경 또는 공개되는 것을 방지하기 위해 
-                적절한 보안 조치를 취하고 있습니다. 데이터 전송 및 저장 시 업계 표준 암호화를 사용합니다.
-            </p>
-
-            <h2>5. 데이터 보존</h2>
-            <p>
-                저희는 개인정보를 수집한 목적을 달성하는 데 합리적으로 필요한 기간 동안만 보존하며, 
-                이는 법적, 규정, 세무, 회계 또는 보고 요구사항을 충족하기 위한 목적을 포함합니다.
-            </p>
-
-            <h2>6. 개인정보주체의 권리</h2>
-            <p>개인정보보호법에 따라 다음과 같은 권리를 가지고 있습니다:</p>
-            <ul>
-                <li>개인정보 처리현황 통지 요구</li>
-                <li>개인정보 열람 요구</li>
-                <li>개인정보 정정·삭제 요구</li>
-                <li>개인정보 처리정지 요구</li>
-                <li>손해배상 청구</li>
-            </ul>
-
-            <h2>7. 제3자 서비스</h2>
-            <p>
-                저희 애플리케이션은 클라우드 저장소, 분석 및 기타 기능을 위해 제3자 서비스를 이용할 수 있습니다. 
-                이러한 서비스는 고유한 개인정보처리방침을 가지고 있으며, 검토하시기를 권장합니다.
-            </p>
-
-            <h2>8. 개인정보처리방침의 변경</h2>
-            <p>
-                저희는 개인정보처리방침을 수시로 업데이트할 수 있습니다. 변경 사항이 있을 경우 
-                이 페이지에 새로운 개인정보처리방침을 게시하고 "최종 수정일"을 업데이트하여 알려드립니다.
-            </p>
-
-            <div class="contact-info">
-                <h3>연락처 정보</h3>
-                <p>개인정보처리방침 또는 개인정보 처리 관행에 대한 질문이 있으시면 아래로 연락해 주세요:</p>
-                <p><strong>이메일:</strong> privacy@travelee.app</p>
-                <p><strong>주소:</strong> DDW Services 개인정보보호팀</p>
-            </div>
+                <a href="../" class="btn btn-primary">← Travelee로 돌아가기</a>
+                <a href="./history/" class="btn btn-secondary">방침 히스토리 보기</a>
+                <a href="../support/" class="btn btn-secondary">지원 센터 문의</a>
+            
         </div>
-
-        <div class="nav-links">
-            <a href="../" class="nav-link">← Travelee로 돌아가기</a>
-            <a href="./history/" class="nav-link">버전 히스토리</a>
-            <a href="../support/" class="nav-link">지원 센터</a>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 DDW Services. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Language Switcher
-        const langDropdown = document.getElementById('langDropdown');
-        const langCurrent = document.getElementById('langCurrent');
-        const langOptions = document.getElementById('langOptions');
-
-        langCurrent.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('open');
-        });
-
-        document.addEventListener('click', () => {
-            langDropdown.classList.remove('open');
-        });
-
-        langOptions.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        // Save language preference
-        localStorage.setItem('preferred-language', 'ko');
-    </script>
+    </div>
 </body>
-</html> 
+</html>

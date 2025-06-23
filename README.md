@@ -1,89 +1,187 @@
 # DDW Services
 
-> 혁신적이고 실용적인 디지털 솔루션을 제공하는 서비스 포트폴리오
+DDW Services는 다양한 디지털 서비스를 제공하는 포트폴리오 웹사이트입니다.
 
-## 🚀 서비스 목록
+## 🌟 서비스 목록
 
-### 1. Travelee
-- **상태**: 서비스 중 ✅
-- **설명**: 당신의 특별한 여행을 더욱 특별하게 만들어주는 여행 일정 관리 앱
-- **주요 기능**:
-  - 여행 일정 관리 (시간, 장소, 메모)
-  - 국가별 여행 정보 제공
-  - 데이터 백업 및 복원
-- **링크**: [서비스 소개](./travelee/) | [지원 센터](./travelee/support/) | [개인정보처리방침](./travelee/privacy/)
-- **앱스토어**: [iOS 다운로드](https://apps.apple.com/kr/app/%ED%8A%B8%EB%9E%98%EB%B8%94%EB%A6%AC/id6746734501)
+- **✈️ Travelee**: 스마트한 여행 계획 및 일정 관리 서비스
+- **🐱 Go Kitty**: 귀여운 고양이와 함께하는 무한 러닝 게임 (출시 예정)
+
+## 🌍 다국어 지원
+
+- 🇺🇸 English (기본)
+- 🇰🇷 한국어
 
 ## 📁 프로젝트 구조
 
 ```
 ddw/
-├── index.html                    # 메인 서비스 목록 페이지
-├── app-ads.txt                   # Google AdSense 설정
-├── README.md                     # 프로젝트 설명
-└── travelee/                     # Travelee 서비스
-    ├── index.html                # Travelee 마케팅 페이지
-    ├── support/                  # 지원 센터
-    │   └── index.html            # 지원 페이지
-    └── privacy/                  # 개인정보처리방침
-        ├── index.html            # 현재 개인정보처리방침
-        └── history/              # 방침 히스토리 관리
-            └── index.html        # 방침 버전 히스토리
+├── index.html (언어 감지 & 리다이렉트)
+├── en/ (영어 버전)
+│   ├── index.html (메인 서비스 목록)
+│   ├── travelee/
+│   │   ├── index.html (서비스 소개)
+│   │   ├── support/index.html (지원 센터)
+│   │   └── privacy/
+│   │       ├── index.html (개인정보처리방침)
+│   │       └── history/index.html (방침 히스토리)
+│   └── gokitty/
+│       ├── index.html (게임 소개)
+│       ├── support/index.html (지원 센터)
+│       └── privacy/
+│           ├── index.html (개인정보처리방침)
+│           └── history/index.html (방침 히스토리)
+├── ko/ (한국어 버전)
+│   └── [영어와 동일한 구조]
+├── scripts/ (개발 도구)
+│   ├── md-to-html.py (Markdown → HTML 변환기)
+│   └── build.sh (일괄 변환 스크립트)
+├── docs/ (Markdown 소스 파일들)
+└── requirements.txt (Python 패키지 의존성)
 ```
 
-## 🔧 새 서비스 추가 방법
+## 🛠️ Markdown to HTML 변환 도구
 
-새로운 서비스를 추가할 때는 다음 구조를 따라주세요:
+개인정보처리방침이나 지원 문서를 Markdown으로 작성하고 자동으로 예쁜 HTML로 변환할 수 있는 도구를 제공합니다.
 
-1. **서비스별 폴더 생성**: `[서비스명]/`
-2. **마케팅 페이지**: `[서비스명]/index.html`
-3. **지원 센터**: `[서비스명]/support/index.html`
-4. **개인정보처리방침**: `[서비스명]/privacy/index.html`
-5. **방침 히스토리**: `[서비스명]/privacy/history/index.html`
-6. **메인 `index.html`에 새 서비스 카드 추가**
+### 설치
 
-## 📋 개인정보처리방침 히스토리 관리
+```bash
+# Python 패키지 설치
+pip3 install -r requirements.txt
 
-각 서비스의 개인정보처리방침은 버전 관리가 됩니다:
+# 스크립트 실행 권한 부여
+chmod +x scripts/build.sh scripts/md-to-html.py
+```
 
-- **현재 방침**: `[서비스명]/privacy/index.html`
-- **이전 버전들**: `[서비스명]/privacy/history/`에서 확인 가능
-- **방침 변경 시**: 히스토리 페이지에 새 버전 추가
+### 개별 파일 변환
 
-### 방침 업데이트 절차
-1. 기존 방침 내용을 히스토리에 보관
-2. 새 방침 내용으로 `index.html` 업데이트
-3. `history/index.html`에 새 버전 항목 추가
-4. 버전 정보 및 변경사항 명시
+```bash
+# 기본 사용법
+python3 scripts/md-to-html.py <markdown_file> --type <privacy|support> --lang <en|ko> --service <travelee|gokitty>
 
-## 🌐 GitHub Pages 배포
+# 예시
+python3 scripts/md-to-html.py docs/travelee-privacy-ko.md --type privacy --lang ko --service travelee
+python3 scripts/md-to-html.py docs/gokitty-support-en.md --type support --lang en --service gokitty
+python3 scripts/md-to-html.py docs/travelee-support-ko.md --type support --lang ko --service travelee
+```
 
-이 프로젝트는 GitHub Pages를 통해 자동 배포됩니다:
+### 일괄 변환
 
-- 메인 브랜치에 푸시하면 자동으로 사이트가 업데이트됩니다
-- 도메인: `https://[사용자명].github.io/ddw`
+```bash
+# docs/ 폴더의 모든 Markdown 파일을 한 번에 변환
+./scripts/build.sh
+```
 
-## ✨ 전체 HTML 구조의 장점
+### 파일명 규칙
 
-### 일관성
-- **통일된 구조**: 모든 페이지가 동일한 HTML 형식
-- **예측 가능성**: 파일 확장자와 형태가 일치
-- **유지보수 용이**: 같은 방식으로 모든 페이지 관리
+`docs/` 폴더에 다음 규칙으로 Markdown 파일을 작성하세요:
 
-### 디자인 자유도
-- **완전한 제어**: CSS/JS를 자유롭게 활용
-- **복잡한 레이아웃**: 정밀한 디자인 구현 가능
-- **인터랙션**: 동적 요소 및 애니메이션 적용
+```
+{service}-{type}-{lang}.md
+```
 
-### 성능
-- **빠른 로딩**: Jekyll 변환 과정 없이 직접 서빙
-- **캐싱 효율**: 정적 HTML 파일의 브라우저 캐싱
-- **호환성**: 모든 브라우저에서 일관된 동작
+- **service**: `travelee`, `gokitty`
+- **type**: `privacy` (개인정보처리방침), `support` (지원센터)
+- **lang**: `en` (영어), `ko` (한국어)
 
-## 📞 연락처
+#### 예시 파일명
+```
+docs/
+├── travelee-privacy-ko.md
+├── travelee-privacy-en.md
+├── travelee-support-ko.md
+├── travelee-support-en.md
+├── gokitty-privacy-ko.md
+├── gokitty-privacy-en.md
+├── gokitty-support-ko.md
+└── gokitty-support-en.md
+```
 
-각 서비스별 문의사항은 해당 서비스의 지원 센터 페이지에서 확인할 수 있습니다.
+### 변환 결과
 
----
+변환된 HTML 파일은 자동으로 올바른 위치에 저장됩니다:
 
-© 2025 DDW Services. All rights reserved.
+- `docs/travelee-privacy-ko.md` → `ko/travelee/privacy/index.html`
+- `docs/gokitty-support-en.md` → `en/gokitty/support/index.html`
+
+### Markdown 작성 가이드
+
+#### 개인정보처리방침 (`privacy`)
+```markdown
+# 개인정보처리방침
+
+## 1. 개인정보의 처리목적
+서비스 제공을 위한 개인정보 처리 목적을 설명합니다.
+
+## 2. 개인정보의 처리 및 보유기간
+| 항목 | 보유기간 | 근거 |
+|------|----------|------|
+| 회원정보 | 회원탈퇴 시까지 | 서비스 제공 |
+
+> **중요한 내용**은 인용구를 사용해 강조할 수 있습니다.
+```
+
+#### 지원센터 (`support`)
+```markdown
+# 지원센터
+
+## 🎮 시작하기
+게임 사용법을 설명합니다.
+
+### 자주 묻는 질문
+#### 문제가 발생했을 때는?
+1. 첫 번째 해결책
+2. 두 번째 해결책
+
+## 📞 문의하기
+추가 도움이 필요하면 연락주세요.
+```
+
+### 지원되는 Markdown 기능
+
+- **제목**: `#`, `##`, `###`
+- **강조**: `**굵게**`, `*기울임*`
+- **목록**: `1.`, `-`, `*`
+- **표**: `| 열1 | 열2 |`
+- **인용구**: `> 인용 내용`
+- **코드**: `` `인라인 코드` ``, ``` 코드 블록 ```
+- **링크**: `[텍스트](URL)`
+
+## 🚀 배포
+
+GitHub Pages를 사용하여 자동 배포됩니다.
+
+1. `main` 브랜치에 코드 푸시
+2. GitHub Actions가 자동으로 빌드 및 배포
+3. `https://username.github.io/ddw`에서 확인
+
+## 🔧 개발
+
+### 새 서비스 추가하기
+
+1. `scripts/md-to-html.py`의 `SERVICE_CONFIG`에 새 서비스 추가:
+```python
+SERVICE_CONFIG = {
+    'newservice': {
+        'icon': '🆕',
+        'name': 'New Service',
+        'brand_color': '#FF6B6B',
+        'brand_color_hover': '#FF5252',
+        'brand_color_light': '#FFB3B3'
+    }
+}
+```
+
+2. 각 언어별 메인 페이지에 서비스 카드 추가
+3. Markdown 파일 작성 및 변환
+
+### 새 언어 추가하기
+
+1. 새 언어 폴더 생성 (예: `fr/`)
+2. `scripts/md-to-html.py`의 `TEXTS`에 새 언어 추가
+3. `index.html`의 언어 감지 로직 업데이트
+
+## 📝 라이선스
+
+이 프로젝트는 MIT 라이선스 하에 배포됩니다.

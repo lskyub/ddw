@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy History - Go Kitty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #87CEEB;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #87CEEB;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #87CEEB;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .kitty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-version {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .current-version h3 {
+            color: #155724;
+            margin-bottom: 0.5rem;
+        }
+
+        .current-version-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .current-version-link:hover {
+            background-color: #218838;
+        }
+
+        .history-timeline {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            border-left: 2px solid #e9ecef;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #87CEEB;
+        }
+
+        .timeline-current::before {
+            background-color: #28a745;
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .version-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .version-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .version-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-current {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .version-changes {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .version-changes ul {
+            margin-left: 1.5rem;
+        }
+
+        .version-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #87CEEB;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5DADE2;
+        }
+
+        .no-versions {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .version-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../../" class="nav-brand">🐱 Go Kitty</a>
+            <div class="nav-links">
+                <a href="../" class="nav-link">← Current Policy</a>
+                <a href="../../" class="nav-link">Game Info</a>
+                <a href="../../../" class="nav-link">All Services</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="kitty-icon">🐱</div>
+            <h1>Privacy Policy History</h1>
+            <p>Track all versions of Go Kitty's privacy policy</p>
+        </div>
+
+        <div class="current-version">
+            <h3>🔔 Current Version</h3>
+            <p>v1.0 (Effective January 2, 2025) - Initial version</p>
+            <a href="../" class="current-version-link">View Current Policy</a>
+        </div>
+
+        <div class="history-timeline">
+            <h2 style="margin-bottom: 2rem; color: #2c3e50;">Version History</h2>
+            
+            <!-- Current Version -->
+            <div class="timeline-item timeline-current">
+                <div class="version-header">
+                    <div>
+                        <div class="version-number">Version 1.0</div>
+                        <div class="version-date">January 2, 2025</div>
+                    </div>
+                    <span class="version-status status-current">Current Version</span>
+                </div>
+                <div class="version-changes">
+                    <p><strong>Major Changes:</strong></p>
+                    <ul>
+                        <li>Initial Go Kitty game privacy policy creation</li>
+                        <li>Defined personal information collection and usage purposes</li>
+                        <li>Established data retention periods and processing methods</li>
+                        <li>Outlined data subject rights and exercise procedures</li>
+                        <li>Provided privacy officer contact information</li>
+                    </ul>
+                </div>
+                <div class="version-actions">
+                    <a href="../" class="btn btn-primary">View Current Policy</a>
+                </div>
+            </div>
+
+            <!-- Future versions will be added here -->
+            <div class="no-versions">
+                <p>🕐 Additional version history will appear here whenever the privacy policy is updated.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

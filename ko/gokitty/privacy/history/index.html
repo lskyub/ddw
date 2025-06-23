@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보처리방침 히스토리 - Go Kitty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #87CEEB;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #87CEEB;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #87CEEB;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .kitty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .current-version {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .current-version h3 {
+            color: #155724;
+            margin-bottom: 0.5rem;
+        }
+
+        .current-version-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .current-version-link:hover {
+            background-color: #218838;
+        }
+
+        .history-timeline {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            border-left: 2px solid #e9ecef;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #87CEEB;
+        }
+
+        .timeline-current::before {
+            background-color: #28a745;
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .version-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .version-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .version-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-current {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .version-changes {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .version-changes ul {
+            margin-left: 1.5rem;
+        }
+
+        .version-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #87CEEB;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5DADE2;
+        }
+
+        .no-versions {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .version-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../../" class="nav-brand">🐱 Go Kitty</a>
+            <div class="nav-links">
+                <a href="../" class="nav-link">← 현재 방침</a>
+                <a href="../../" class="nav-link">게임 정보</a>
+                <a href="../../../" class="nav-link">전체 서비스</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="kitty-icon">🐱</div>
+            <h1>개인정보처리방침 히스토리</h1>
+            <p>Go Kitty 개인정보처리방침의 모든 버전을 확인하세요</p>
+        </div>
+
+        <div class="current-version">
+            <h3>🔔 현재 적용 중인 버전</h3>
+            <p>v1.0 (2025년 1월 2일 시행) - 최초 버전</p>
+            <a href="../" class="current-version-link">현재 방침 보기</a>
+        </div>
+
+        <div class="history-timeline">
+            <h2 style="margin-bottom: 2rem; color: #2c3e50;">버전 히스토리</h2>
+            
+            <!-- Current Version -->
+            <div class="timeline-item timeline-current">
+                <div class="version-header">
+                    <div>
+                        <div class="version-number">버전 1.0</div>
+                        <div class="version-date">2025년 1월 2일</div>
+                    </div>
+                    <span class="version-status status-current">현재 버전</span>
+                </div>
+                <div class="version-changes">
+                    <p><strong>주요 변경사항:</strong></p>
+                    <ul>
+                        <li>Go Kitty 게임 개인정보처리방침 최초 작성</li>
+                        <li>개인정보 수집·이용 목적 명시</li>
+                        <li>개인정보 보유기간 및 처리방법 정의</li>
+                        <li>정보주체의 권리 및 행사방법 안내</li>
+                        <li>개인정보보호책임자 연락처 제공</li>
+                    </ul>
+                </div>
+                <div class="version-actions">
+                    <a href="../" class="btn btn-primary">현재 방침 보기</a>
+                </div>
+            </div>
+
+            <!-- Future versions will be added here -->
+            <div class="no-versions">
+                <p>🕐 추가 버전 히스토리는 개인정보처리방침이 업데이트될 때마다 이곳에 표시됩니다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
