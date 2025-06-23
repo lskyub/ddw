@@ -46,6 +46,7 @@ ddw/
 
 ### 설치
 
+
 ```bash
 # Python 패키지 설치
 pip3 install -r requirements.txt
@@ -57,6 +58,9 @@ chmod +x scripts/build.sh scripts/md-to-html.py
 ### 개별 파일 변환
 
 ```bash
+# 가상환경 활성화
+source venv/bin/activate
+
 # 기본 사용법
 python3 scripts/md-to-html.py <markdown_file> --type <privacy|support> --lang <en|ko> --service <travelee|gokitty>
 
