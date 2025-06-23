@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travelee - 당신의 여행 파트너</title>
+    <title>DDW Services - 디지털 솔루션 포트폴리오</title>
     <style>
         * {
             margin: 0;
@@ -15,122 +15,156 @@
         body {
             line-height: 1.6;
             color: #333;
+            background-color: #f8f9fa;
         }
 
         .header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200') no-repeat center;
-            background-size: cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
             text-align: center;
-            color: white;
         }
 
-        .header-content h1 {
-            font-size: 4rem;
+        .header h1 {
+            font-size: 3rem;
             margin-bottom: 1rem;
-        }
-
-        .header-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #FF6B6B;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
             font-weight: bold;
-            transition: background-color 0.3s;
-            margin-bottom: 2rem;
         }
 
-        .cta-button:hover {
-            background-color: #FF5252;
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
-        .store-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .store-link {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .store-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .store-link img {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-        }
-
-        .store-link.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .features {
-            padding: 5rem 2rem;
-            background-color: #f9f9f9;
-        }
-
-        .features-container {
+        .services-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        .feature-card {
+        .service-card {
             background: white;
+            border-radius: 12px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
         }
 
-        .feature-card h3 {
-            color: #FF6B6B;
-            margin-bottom: 1rem;
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .travelee-icon {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+        }
+
+        .service-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .service-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-development {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .service-description {
+            margin-bottom: 2rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .service-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .service-link {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a6fd8;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #6c757d;
+            border-color: #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            color: #495057;
         }
 
         .footer {
-            background-color: #333;
-            color: white;
+            background-color: #343a40;
+            color: #adb5bd;
             text-align: center;
             padding: 2rem;
+            margin-top: 4rem;
         }
 
         @media (max-width: 768px) {
-            .header-content h1 {
-                font-size: 2.5rem;
+            .header h1 {
+                font-size: 2rem;
             }
 
-            .header-content p {
-                font-size: 1.2rem;
+            .services-grid {
+                grid-template-columns: 1fr;
             }
 
-            .store-buttons {
+            .service-links {
                 flex-direction: column;
             }
         }
@@ -138,43 +172,59 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-content">
-            <h1>Travelee</h1>
-            <p>당신의 특별한 여행을 더욱 특별하게</p>
-            <a href="#" class="cta-button">지금 시작하기</a>
-            <div class="store-buttons">
-                <a href="https://apps.apple.com/kr/app/%ED%8A%B8%EB%9E%98%EB%B8%94%EB%A6%AC/id6746734501" class="store-link" target="_blank">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTE4LjcxIDI0TDEyIDIwLjQ1IDUuMjkgMjRsMS4yNy03LjM5TDEgMTEuMjFsNy40MS0xLjA3TDEyIDNoMy41OWwzLjU5IDcuMTQgNy40MSAxLjA3LTUuNTUgNS40eiIvPjwvc3ZnPg==" alt="iOS">
-                    iOS 앱스토어
-                </a>
-                <span class="store-link disabled">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTcuNzEgMy41MkwxLjE1IDEwbDYuNTYgNi40OCAyLjY1LTIuNjFMMy43IDEwbDYuNjEtMy44OS0yLjYtMi41OXpNMTYuMjkgMy41MmwyLjYgMi41OUwxMi4zIDEwbDYuNjEgMy44OS0yLjY1IDIuNjFMMjIuODUgMTBsLTYuNTYtNi40OHoiLz48L3N2Zz4=" alt="Android">
-                    출시 예정
-                    
-                </span>
-            </div>
-        </div>
+        <h1>DDW Services</h1>
+        <p>혁신적이고 실용적인 디지털 솔루션을 제공합니다</p>
     </header>
 
-    <section class="features">
-        <div class="features-container">
-            <div class="feature-card">
-                <h3>여행 일정 관리</h3>
-                <p>시간, 장소, 메모 등 상세 정보를 체계적으로 관리하고 효율적으로 일정을 정리할 수 있습니다.</p>
+    <main class="services-container">
+        <div class="services-grid">
+            <!-- Travelee Service -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon travelee-icon">
+                        ✈️
+                    </div>
+                    <div class="service-info">
+                        <h3>Travelee</h3>
+                        <span class="service-status status-active">서비스 중</span>
+                    </div>
+                </div>
+                <p class="service-description">
+                    당신의 특별한 여행을 더욱 특별하게 만들어주는 여행 일정 관리 앱입니다. 
+                    시간, 장소, 메모 등을 체계적으로 관리하고, 국가별 여행 정보를 제공하며, 
+                    소중한 여행 데이터를 안전하게 백업할 수 있습니다.
+                </p>
+                <div class="service-links">
+                    <a href="./travelee/" class="service-link btn-primary">서비스 소개</a>
+                    <a href="./travelee/support/" class="service-link btn-secondary">지원 센터</a>
+                    <a href="./travelee/privacy/" class="service-link btn-secondary">개인정보처리방침</a>
+                </div>
             </div>
-            <div class="feature-card">
-                <h3>국가별 여행 정보</h3>
-                <p>국가별 정보를 손쉽게 업데이트하고 관리하며, 국가 선택을 통해 편리하게 여행 정보를 입력하세요.</p>
-            </div>
-            <div class="feature-card">
-                <h3>데이터 백업 및 복원</h3>
-                <p>소중한 여행 일정과 정보를 안전하게 백업하고 필요할 때 언제든 복원할 수 있습니다.</p>
+
+            <!-- Future Service Placeholder -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">
+                        🚀
+                    </div>
+                    <div class="service-info">
+                        <h3>새로운 서비스</h3>
+                        <span class="service-status status-development">개발 예정</span>
+                    </div>
+                </div>
+                <p class="service-description">
+                    더 많은 혁신적인 서비스가 곧 출시될 예정입니다. 
+                    기대해 주세요!
+                </p>
+                <div class="service-links">
+                    <span class="service-link btn-secondary" style="opacity: 0.5; cursor: not-allowed;">출시 예정</span>
+                </div>
             </div>
         </div>
-    </section>
+    </main>
 
     <footer class="footer">
-        <p>&copy; 2025 Travelee. All rights reserved.</p>
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
     </footer>
 </body>
 </html> 
