@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelee - Support Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-question.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .faq-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 200px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .contact-card p {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .breadcrumb-nav {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇺🇸</span>
+                <span>EN</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../../../en/travelee/support/" class="lang-option current">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../../../ko/travelee/support/" class="lang-option">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>Travelee Support Center</h1>
+        <p>We're here to help you with your travel planning journey</p>
+    </header>
+
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="../../">Services</a>
+            <span>→</span>
+            <a href="../">Travelee</a>
+            <span>→</span>
+            <span>Support Center</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I create a travel itinerary?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>To create a travel itinerary, start by adding your destination and travel dates. Then, add activities, locations, and notes for each day of your trip. You can organize your schedule by time and location for easy reference.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is my travel data safe and secure?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we take data security seriously. All your travel information is encrypted and stored securely. We also provide automatic cloud backup to ensure your data is never lost.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I access my itinerary offline?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, once you've created your itinerary, it's available offline. You can access your travel plans even without an internet connection, making it perfect for international travel.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I get country-specific travel information?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our app provides essential information for each country including currency, local customs, weather patterns, and travel tips. This information is automatically available when you select your destination.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I share my itinerary with others?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, you can easily share your travel plans with friends, family, or travel companions. You can export your itinerary or share it directly through the app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Contact Support</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>Send us an email and we'll respond within 24 hours</p>
+                    <a href="mailto:support@travelee.app" class="contact-btn">Send Email</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our support team in real-time</p>
+                    <a href="#" class="contact-btn">Start Chat</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📚</div>
+                    <h3>Help Center</h3>
+                    <p>Browse our comprehensive guide and tutorials</p>
+                    <a href="#" class="contact-btn">Visit Help Center</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="nav-links">
+            <a href="../" class="nav-link">← Back to Travelee</a>
+            <a href="../privacy/" class="nav-link">Privacy Policy</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'en');
+    </script>
+</body>
+</html> 

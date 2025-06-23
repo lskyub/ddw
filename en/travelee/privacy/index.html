@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelee - Privacy Policy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .version-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .version-info h3 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-info p {
+            color: #1565c0;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-info a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .version-info a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
+        }
+
+        .privacy-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .privacy-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem 0;
+            color: #2c3e50;
+        }
+
+        .privacy-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .privacy-content ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .privacy-content li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .breadcrumb-nav {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .privacy-content {
+                padding: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇺🇸</span>
+                <span>EN</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../../../en/travelee/privacy/" class="lang-option current">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../../../ko/travelee/privacy/" class="lang-option">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is important to us</p>
+    </header>
+
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="../../">Services</a>
+            <span>→</span>
+            <a href="../">Travelee</a>
+            <span>→</span>
+            <span>Privacy Policy</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="version-info">
+            <h3>Current Version: 1.0</h3>
+            <p>Effective Date: January 1, 2025</p>
+            <p>Last Updated: January 1, 2025</p>
+            <a href="./history/">View Version History →</a>
+        </div>
+
+        <div class="privacy-content">
+            <h2>1. Introduction</h2>
+            <p>
+                Welcome to Travelee. We respect your privacy and are committed to protecting your personal data. 
+                This privacy policy will inform you about how we look after your personal data when you use our 
+                travel itinerary management application and tell you about your privacy rights and how the law protects you.
+            </p>
+
+            <h2>2. Data We Collect</h2>
+            <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
+            
+            <h3>2.1 Travel Data</h3>
+            <ul>
+                <li>Travel itineraries and schedules</li>
+                <li>Destination information</li>
+                <li>Travel dates and times</li>
+                <li>Notes and personal travel preferences</li>
+            </ul>
+
+            <h3>2.2 Technical Data</h3>
+            <ul>
+                <li>Device information and identifiers</li>
+                <li>Usage data and analytics</li>
+                <li>Log data and crash reports</li>
+            </ul>
+
+            <h2>3. How We Use Your Data</h2>
+            <p>We use your personal data for the following purposes:</p>
+            <ul>
+                <li>To provide and maintain our travel planning services</li>
+                <li>To backup and synchronize your travel data across devices</li>
+                <li>To provide country-specific travel information</li>
+                <li>To improve our application and user experience</li>
+                <li>To communicate with you about service updates</li>
+            </ul>
+
+            <h2>4. Data Security</h2>
+            <p>
+                We have put in place appropriate security measures to prevent your personal data from being 
+                accidentally lost, used or accessed in an unauthorized way, altered or disclosed. We use 
+                industry-standard encryption to protect your data both in transit and at rest.
+            </p>
+
+            <h2>5. Data Retention</h2>
+            <p>
+                We will only retain your personal data for as long as reasonably necessary to fulfil the 
+                purposes we collected it for, including for the purposes of satisfying any legal, regulatory, 
+                tax, accounting or reporting requirements.
+            </p>
+
+            <h2>6. Your Rights</h2>
+            <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data:</p>
+            <ul>
+                <li>Request access to your personal data</li>
+                <li>Request correction of your personal data</li>
+                <li>Request erasure of your personal data</li>
+                <li>Object to processing of your personal data</li>
+                <li>Request restriction of processing your personal data</li>
+                <li>Request transfer of your personal data</li>
+            </ul>
+
+            <h2>7. Third-Party Services</h2>
+            <p>
+                Our application may use third-party services for cloud storage, analytics, and other features. 
+                These services have their own privacy policies, and we encourage you to review them.
+            </p>
+
+            <h2>8. Changes to This Policy</h2>
+            <p>
+                We may update this privacy policy from time to time. We will notify you of any changes by 
+                posting the new privacy policy on this page and updating the "Last Updated" date.
+            </p>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>If you have any questions about this privacy policy or our privacy practices, please contact us at:</p>
+                <p><strong>Email:</strong> privacy@travelee.app</p>
+                <p><strong>Address:</strong> DDW Services Privacy Team</p>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="../" class="nav-link">← Back to Travelee</a>
+            <a href="./history/" class="nav-link">Version History</a>
+            <a href="../support/" class="nav-link">Support Center</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'en');
+    </script>
+</body>
+</html> 

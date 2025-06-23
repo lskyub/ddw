@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelee - Privacy Policy Version History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
+        }
+
+        .intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .intro h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            color: #6c757d;
+        }
+
+        .version-timeline {
+            position: relative;
+        }
+
+        .version-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .version-item {
+            position: relative;
+            margin-left: 60px;
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .version-item::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px #667eea;
+        }
+
+        .version-item.current::before {
+            background: #28a745;
+            box-shadow: 0 0 0 2px #28a745;
+        }
+
+        .version-header {
+            padding: 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .version-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .version-item.current .version-number {
+            background: #28a745;
+        }
+
+        .version-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .version-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-summary {
+            color: #6c757d;
+        }
+
+        .version-content {
+            padding: 2rem;
+        }
+
+        .version-content h4 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .version-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .version-content li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .change-type {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        .change-type.added {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .change-type.updated {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .change-type.removed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .breadcrumb-nav {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .version-timeline::before {
+                left: 20px;
+            }
+
+            .version-item {
+                margin-left: 40px;
+            }
+
+            .version-item::before {
+                left: -33px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇺🇸</span>
+                <span>EN</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../../../../en/travelee/privacy/history/" class="lang-option current">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../../../../ko/travelee/privacy/history/" class="lang-option">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>Privacy Policy Version History</h1>
+        <p>Track all changes to our privacy policy over time</p>
+    </header>
+
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="../../../">Services</a>
+            <span>→</span>
+            <a href="../../">Travelee</a>
+            <span>→</span>
+            <a href="../">Privacy Policy</a>
+            <span>→</span>
+            <span>Version History</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="intro">
+            <h2>Privacy Policy Evolution</h2>
+            <p>We believe in transparency. Here you can view all versions of our privacy policy and understand what has changed over time.</p>
+        </div>
+
+        <div class="version-timeline">
+            <!-- Current Version -->
+            <div class="version-item current">
+                <div class="version-header">
+                    <div class="version-number">Version 1.0</div>
+                    <div class="version-date">
+                        <strong>Published:</strong> January 1, 2025<br>
+                        <strong>Effective:</strong> January 1, 2025<br>
+                        <span style="color: #28a745; font-weight: 500;">✓ Current Version</span>
+                    </div>
+                    <h3 class="version-title">Initial Privacy Policy</h3>
+                    <p class="version-summary">Our first comprehensive privacy policy covering all aspects of data collection, usage, and user rights.</p>
+                </div>
+                <div class="version-content">
+                    <h4>What's New</h4>
+                    <ul>
+                        <li><span class="change-type added">Added</span> Comprehensive data collection practices</li>
+                        <li><span class="change-type added">Added</span> User rights and data subject access</li>
+                        <li><span class="change-type added">Added</span> Data security and encryption measures</li>
+                        <li><span class="change-type added">Added</span> Third-party service integration policies</li>
+                        <li><span class="change-type added">Added</span> Data retention and deletion procedures</li>
+                        <li><span class="change-type added">Added</span> Contact information for privacy inquiries</li>
+                    </ul>
+
+                    <h4>Key Highlights</h4>
+                    <ul>
+                        <li>Clear explanation of travel data collection</li>
+                        <li>Transparent cloud backup and sync policies</li>
+                        <li>User control over personal data</li>
+                        <li>Industry-standard security measures</li>
+                        <li>GDPR compliance framework</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Future versions will be added here -->
+            <div class="version-item" style="opacity: 0.6; border: 2px dashed #dee2e6;">
+                <div class="version-header">
+                    <div class="version-number" style="background: #6c757d;">Future Updates</div>
+                    <div class="version-date">
+                        <strong>Coming:</strong> As needed<br>
+                        <span style="color: #6c757d;">Future versions will be listed here</span>
+                    </div>
+                    <h3 class="version-title">Upcoming Changes</h3>
+                    <p class="version-summary">We will update this policy as our service evolves and new features are added.</p>
+                </div>
+                <div class="version-content">
+                    <h4>What to Expect</h4>
+                    <ul>
+                        <li>Updates for new feature integrations</li>
+                        <li>Enhanced data protection measures</li>
+                        <li>Compliance with evolving privacy regulations</li>
+                        <li>User feedback-driven improvements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="../" class="nav-link">← Back to Privacy Policy</a>
+            <a href="../../" class="nav-link">Back to Travelee</a>
+            <a href="../../support/" class="nav-link">Support Center</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'en');
+    </script>
+</body>
+</html> 

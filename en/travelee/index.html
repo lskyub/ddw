@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelee - Travel Itinerary Management App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E8E 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .hero-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 6rem;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .hero-icon {
+                font-size: 4rem;
+            }
+
+            .features h2 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇺🇸</span>
+                <span>EN</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../../en/travelee/" class="lang-option current">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../../ko/travelee/" class="lang-option">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-icon">✈️</div>
+        <h1>Travelee</h1>
+        <p>Make your special trips even more special</p>
+    </section>
+
+    <section class="features">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Itinerary Management</h3>
+                <p>Systematically organize your travel schedule with time, location, and notes for each activity.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Country Information</h3>
+                <p>Get essential travel information for each country including currency, weather, and cultural tips.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">☁️</div>
+                <h3>Secure Backup</h3>
+                <p>Keep your precious travel data safe with automatic cloud backup and synchronization.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Optimized</h3>
+                <p>Access your travel plans anywhere, anytime with our mobile-friendly interface.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Interactive Maps</h3>
+                <p>Visualize your travel routes and locations with integrated map features.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Premium Experience</h3>
+                <p>Enjoy an ad-free, premium travel planning experience designed for modern travelers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Start Your Journey</h2>
+        <p>Ready to plan your next adventure? Explore our services and support options.</p>
+        
+        <div class="nav-links">
+            <a href="../" class="nav-link">← Back to Services</a>
+            <a href="./support/" class="nav-link">Support Center</a>
+            <a href="./privacy/" class="nav-link">Privacy Policy</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'en');
+    </script>
+</body>
+</html> 

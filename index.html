@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDW Services - 디지털 솔루션 포트폴리오</title>
+    <title>DDW Services</title>
     <style>
         * {
             margin: 0;
@@ -13,218 +13,216 @@
         }
 
         body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .services-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e9ecef;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-
-        .service-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-
-        .travelee-icon {
-            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
-        }
-
-        .service-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .service-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-active {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .status-development {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-
-        .service-description {
-            margin-bottom: 2rem;
-            color: #6c757d;
-            line-height: 1.6;
-        }
-
-        .service-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .service-link {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .btn-primary {
-            background-color: #667eea;
             color: white;
         }
 
-        .btn-primary:hover {
-            background-color: #5a6fd8;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #6c757d;
-            border-color: #dee2e6;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f8f9fa;
-            color: #495057;
-        }
-
-        .footer {
-            background-color: #343a40;
-            color: #adb5bd;
+        .language-selector {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
             text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .language-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .language-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .flag {
+            font-size: 1.5rem;
+        }
+
+        .auto-detect {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
+            .language-selector {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .logo {
                 font-size: 2rem;
             }
 
-            .services-grid {
+            .language-options {
                 grid-template-columns: 1fr;
-            }
-
-            .service-links {
-                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <h1>DDW Services</h1>
-        <p>혁신적이고 실용적인 디지털 솔루션을 제공합니다</p>
-    </header>
-
-    <main class="services-container">
-        <div class="services-grid">
-            <!-- Travelee Service -->
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-icon travelee-icon">
-                        ✈️
-                    </div>
-                    <div class="service-info">
-                        <h3>Travelee</h3>
-                        <span class="service-status status-active">서비스 중</span>
-                    </div>
-                </div>
-                <p class="service-description">
-                    당신의 특별한 여행을 더욱 특별하게 만들어주는 여행 일정 관리 앱입니다. 
-                    시간, 장소, 메모 등을 체계적으로 관리하고, 국가별 여행 정보를 제공하며, 
-                    소중한 여행 데이터를 안전하게 백업할 수 있습니다.
-                </p>
-                <div class="service-links">
-                    <a href="./travelee/" class="service-link btn-primary">서비스 소개</a>
-                    <a href="./travelee/support/" class="service-link btn-secondary">지원 센터</a>
-                    <a href="./travelee/privacy/" class="service-link btn-secondary">개인정보처리방침</a>
-                </div>
-            </div>
-
-            <!-- Future Service Placeholder -->
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-icon" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">
-                        🚀
-                    </div>
-                    <div class="service-info">
-                        <h3>새로운 서비스</h3>
-                        <span class="service-status status-development">개발 예정</span>
-                    </div>
-                </div>
-                <p class="service-description">
-                    더 많은 혁신적인 서비스가 곧 출시될 예정입니다. 
-                    기대해 주세요!
-                </p>
-                <div class="service-links">
-                    <span class="service-link btn-secondary" style="opacity: 0.5; cursor: not-allowed;">출시 예정</span>
-                </div>
-            </div>
+    <div class="language-selector">
+        <div class="logo">DDW Services</div>
+        <div class="subtitle">Choose your language / 언어를 선택하세요</div>
+        
+        <div class="language-options">
+            <a href="./en/" class="language-btn" data-lang="en">
+                <span class="flag">🇺🇸</span>
+                <span>English</span>
+            </a>
+            <a href="./ko/" class="language-btn" data-lang="ko">
+                <span class="flag">🇰🇷</span>
+                <span>한국어</span>
+            </a>
         </div>
-    </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 DDW Services. All rights reserved.</p>
-    </footer>
+        <div class="auto-detect">
+            <p>Auto-detecting your language... / 언어를 자동으로 감지 중...</p>
+        </div>
+
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Redirecting... / 리다이렉트 중...</p>
+        </div>
+    </div>
+
+    <script>
+        // 브라우저 언어 감지
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.substring(0, 2).toLowerCase();
+            
+            // 지원하는 언어 목록
+            const supportedLangs = ['en', 'ko'];
+            
+            // 지원하는 언어인지 확인
+            if (supportedLangs.includes(langCode)) {
+                return langCode;
+            }
+            
+            // 기본값은 영어
+            return 'en';
+        }
+
+        // 자동 리다이렉트
+        function autoRedirect() {
+            // 이미 언어 폴더에 있는 경우 리다이렉트하지 않음
+            if (window.location.pathname.includes('/en/') || window.location.pathname.includes('/ko/')) {
+                return;
+            }
+
+            // URL에 언어 매개변수가 있는 경우 우선 처리
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            
+            if (urlLang && ['en', 'ko'].includes(urlLang)) {
+                redirectToLanguage(urlLang);
+                return;
+            }
+
+            // 저장된 언어 설정 확인
+            const savedLang = localStorage.getItem('preferred-language');
+            if (savedLang && ['en', 'ko'].includes(savedLang)) {
+                redirectToLanguage(savedLang);
+                return;
+            }
+
+            // 브라우저 언어 감지
+            const detectedLang = detectLanguage();
+            
+            // 3초 후 자동 리다이렉트
+            setTimeout(() => {
+                redirectToLanguage(detectedLang);
+            }, 3000);
+        }
+
+        // 언어별 페이지로 리다이렉트
+        function redirectToLanguage(lang) {
+            document.querySelector('.auto-detect').style.display = 'none';
+            document.querySelector('.loading').style.display = 'block';
+            
+            // 언어 설정 저장
+            localStorage.setItem('preferred-language', lang);
+            
+            setTimeout(() => {
+                window.location.href = `./${lang}/`;
+            }, 1000);
+        }
+
+        // 언어 버튼 클릭 이벤트
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = btn.getAttribute('data-lang');
+                redirectToLanguage(lang);
+            });
+        });
+
+        // 페이지 로드 시 자동 감지 시작
+        window.addEventListener('load', autoRedirect);
+    </script>
 </body>
 </html> 

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDW Services - Digital Solutions Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .travelee-icon {
+            background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+        }
+
+        .service-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .service-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-development {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .service-description {
+            margin-bottom: 2rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        .service-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .service-link {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a6fd8;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #6c757d;
+            border-color: #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇺🇸</span>
+                <span>EN</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../en/" class="lang-option current">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../ko/" class="lang-option">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>DDW Services</h1>
+        <p>Providing innovative and practical digital solutions</p>
+    </header>
+
+    <main class="services-container">
+        <div class="services-grid">
+            <!-- Travelee Service -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon travelee-icon">
+                        ✈️
+                    </div>
+                    <div class="service-info">
+                        <h3>Travelee</h3>
+                        <span class="service-status status-active">Active</span>
+                    </div>
+                </div>
+                <p class="service-description">
+                    A travel itinerary management app that makes your special trips even more special. 
+                    Systematically manage time, places, and notes, provides country-specific travel information, 
+                    and safely backs up your precious travel data.
+                </p>
+                <div class="service-links">
+                    <a href="./travelee/" class="service-link btn-primary">Service Info</a>
+                    <a href="./travelee/support/" class="service-link btn-secondary">Support Center</a>
+                    <a href="./travelee/privacy/" class="service-link btn-secondary">Privacy Policy</a>
+                </div>
+            </div>
+
+            <!-- Future Service Placeholder -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">
+                        🚀
+                    </div>
+                    <div class="service-info">
+                        <h3>New Service</h3>
+                        <span class="service-status status-development">Coming Soon</span>
+                    </div>
+                </div>
+                <p class="service-description">
+                    More innovative services are coming soon. 
+                    Stay tuned!
+                </p>
+                <div class="service-links">
+                    <span class="service-link btn-secondary" style="opacity: 0.5; cursor: not-allowed;">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'en');
+    </script>
+</body>
+</html> 

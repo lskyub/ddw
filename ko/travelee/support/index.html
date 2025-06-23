@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelee - 지원 센터</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .lang-current:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
+        .lang-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-arrow {
+            transform: rotate(180deg);
+        }
+
+        .lang-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .lang-dropdown.open .lang-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .lang-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .lang-option.current {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-nav a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex: 1;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-question.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .faq-arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 200px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .contact-card p {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #667eea;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #adb5bd;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .breadcrumb-nav {
+                font-size: 0.8rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-link {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-current" id="langCurrent">
+                <span class="flag">🇰🇷</span>
+                <span>KO</span>
+                <span class="lang-arrow">▼</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <a href="../../../en/travelee/support/" class="lang-option">
+                    <span class="flag">🇺🇸</span>
+                    <span>English</span>
+                </a>
+                <a href="../../../ko/travelee/support/" class="lang-option current">
+                    <span class="flag">🇰🇷</span>
+                    <span>한국어</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>Travelee 지원 센터</h1>
+        <p>여행 계획 여정에서 도움을 드리겠습니다</p>
+    </header>
+
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="../../">서비스</a>
+            <span>→</span>
+            <a href="../">Travelee</a>
+            <span>→</span>
+            <span>지원 센터</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="section">
+            <h2>자주 묻는 질문</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>여행 일정은 어떻게 만드나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>여행 일정을 만들려면 먼저 목적지와 여행 날짜를 추가하세요. 그다음 여행 각 날에 대한 활동, 장소, 메모를 추가할 수 있습니다. 시간과 장소별로 일정을 정리하여 쉽게 참조할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>내 여행 데이터는 안전한가요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, 저희는 데이터 보안을 매우 중요하게 생각합니다. 모든 여행 정보는 암호화되어 안전하게 저장됩니다. 또한 자동 클라우드 백업을 제공하여 데이터가 손실되지 않도록 보장합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>오프라인에서도 일정을 볼 수 있나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, 일정을 만들고 나면 오프라인에서도 이용할 수 있습니다. 인터넷 연결 없이도 여행 계획에 접근할 수 있어 해외 여행에 완벽합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>국가별 여행 정보는 어떻게 얻나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>저희 앱은 통화, 현지 관습, 날씨 패턴, 여행 팁 등 각 국가의 필수 정보를 제공합니다. 목적지를 선택하면 이 정보가 자동으로 제공됩니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>일정을 다른 사람과 공유할 수 있나요?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>네, 친구, 가족, 여행 동반자와 여행 계획을 쉽게 공유할 수 있습니다. 일정을 내보내거나 앱을 통해 직접 공유할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>지원 문의</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>이메일 지원</h3>
+                    <p>이메일을 보내주시면 24시간 내에 답변드리겠습니다</p>
+                    <a href="mailto:support@travelee.app" class="contact-btn">이메일 보내기</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>실시간 채팅</h3>
+                    <p>지원팀과 실시간으로 채팅하세요</p>
+                    <a href="#" class="contact-btn">채팅 시작</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📚</div>
+                    <h3>도움말 센터</h3>
+                    <p>포괄적인 가이드와 튜토리얼을 확인하세요</p>
+                    <a href="#" class="contact-btn">도움말 센터 방문</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="nav-links">
+            <a href="../" class="nav-link">← Travelee로 돌아가기</a>
+            <a href="../privacy/" class="nav-link">개인정보처리방침</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 DDW Services. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langDropdown = document.getElementById('langDropdown');
+        const langCurrent = document.getElementById('langCurrent');
+        const langOptions = document.getElementById('langOptions');
+
+        langCurrent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            langDropdown.classList.remove('open');
+        });
+
+        langOptions.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Save language preference
+        localStorage.setItem('preferred-language', 'ko');
+    </script>
+</body>
+</html> 
