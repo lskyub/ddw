@@ -111,17 +111,17 @@ Found a bug? Help us improve Go Kitty by reporting it!
 5. **Screenshots**: If applicable
 
 ### Where to Report:
-Email us at **support@ddwservices.com** with the subject line "Go Kitty Bug Report"
+Email us at **devdino.lsk@gmail.com** with the subject line "Go Kitty Bug Report"
 
 ## 💡 Feature Requests
 
-Have an idea for Go Kitty? We'd love to hear it! Send your suggestions to **support@ddwservices.com** with the subject line "Go Kitty Feature Request"
+Have an idea for Go Kitty? We'd love to hear it! Send your suggestions to **devdino.lsk@gmail.com** with the subject line "Go Kitty Feature Request"
 
 ---
 
 ## 📞 Contact Information
 
-**Email**: support@ddwservices.com  
+**Email**: devdino.lsk@gmail.com  
 **Response Time**: Within 24 hours  
 **Languages**: English, Korean
 
